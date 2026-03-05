@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Focal Therapy 2026 – Conference Program</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
@@ -24,7 +24,7 @@
   }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Heebo', -apple-system, sans-serif;
     background: var(--bg); color: var(--text);
     line-height: 1.6; -webkit-font-smoothing: antialiased;
     position: relative;
@@ -63,6 +63,16 @@
     transform-style: preserve-3d;
     will-change: transform;
   }
+  .hero-logos {
+    display: flex; align-items: center; justify-content: flex-start; gap: 16px;
+    margin-bottom: 16px;
+  }
+  .hero-logos img {
+    height: 30px; width: auto; object-fit: contain;
+  }
+  .hero-logos img.logo-eau {
+    height: 60px;
+  }
   .hero-content:hover {
     background: rgba(255,255,255,0.55);
     border-color: rgba(0,153,204,0.3);
@@ -78,7 +88,6 @@
   .hero-label {
     display: block; font-size: clamp(16px, 2.8vw, 30px); font-weight: 800;
     letter-spacing: -0.5px; text-transform: uppercase;
-    white-space: nowrap;
     background: linear-gradient(90deg, #0088bb, #00c2e8, #0099cc, #4dd8e8, #0088bb);
     background-size: 300% 100%;
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -88,7 +97,7 @@
     width: 100%;
   }
   .hero-section h1 {
-    font-size: clamp(36px, 6vw, 60px); font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 46px); font-weight: 800;
     line-height: 1.08; letter-spacing: -2px; color: var(--text); margin-bottom: 12px;
   }
   .hero-section h1 .gradient {
@@ -362,6 +371,62 @@
     .session-body { padding: 12px 16px; }
     .section-title { font-size: 24px; margin-bottom: 24px; }
   }
+
+  /* ── Registration Modal ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #fff; border-radius: 16px; padding: 36px;
+    max-width: 480px; width: 90%; position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: modal-in 0.3s ease;
+  }
+  @keyframes modal-in {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 12px;
+    background: none; border: none; font-size: 24px;
+    cursor: pointer; color: var(--text3); width: 36px; height: 36px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(0,0,0,0.06); }
+  .modal h2 {
+    font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px;
+  }
+  .modal .modal-subtitle {
+    font-size: 14px; color: var(--text3); margin-bottom: 24px;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--text2); margin-bottom: 5px;
+  }
+  .form-group input, .form-group select {
+    width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: 15px; font-family: inherit;
+    color: var(--text); background: #fff; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: none; border-color: var(--purple);
+    box-shadow: 0 0 0 3px var(--purple-glow);
+  }
+  .form-row { display: flex; gap: 12px; }
+  .form-row .form-group { flex: 1; }
+  .form-submit {
+    width: 100%; padding: 12px; border: none; border-radius: 10px;
+    background: linear-gradient(135deg, var(--purple), var(--purple2));
+    color: #fff; font-size: 16px; font-weight: 700; font-family: inherit;
+    cursor: pointer; margin-top: 8px; transition: opacity 0.2s, transform 0.15s;
+  }
+  .form-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+  .form-submit:active { transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -373,18 +438,23 @@
   <div class="hero-bg"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-label">3 July 2026 · Petah Tikva, Israel</div>
+      <div class="hero-logos">
+        <img src="lg1z@2x.png" alt="EAU Endourology" class="logo-eau">
+        <img src="lg3z@2x.png" alt="IUA">
+        <img src="lg2z@2x.png" alt="Rabin Medical Center">
+      </div>
+      <div class="hero-label">3 July 2026 · Rabin Medical Center, Beilinson Campus, Israel</div>
       <h1>Focal Therapy for Localized Prostate <span class="gradient">Cancer</span></h1>
       <div class="hero-tagline">- Change Is Coming</div>
       <p class="hero-desc">A collaboration between EAU Endourology, Section of Focal Therapy and IUA, Section of Uro-Oncology. International hybrid meeting featuring semi-live surgeries, expert panels, and interactive case discussions.</p>
       <div class="hero-meta">
-        <div class="hero-meta-item">
+        <a class="hero-meta-item" href="https://www.google.com/maps/search/Felsenstein+Medical+Research+Center+Beilinson+Campus+Petah+Tikva+Israel" target="_blank" style="text-decoration:none;color:inherit;">
           <div class="hero-meta-icon">📍</div>
           <div class="hero-meta-text"><strong>Felsenstein Medical Research Center</strong><br>Beilinson Campus, Rabin Medical Center</div>
-        </div>
+        </a>
       </div>
       <div class="hero-pills">
-        <a href="#program" class="pill pill-register">Register Now</a>
+        <a href="#" class="pill pill-register" onclick="document.getElementById('regModal').classList.add('active');return false;">Register Now</a>
         <span class="pill pill-primary">Hybrid - On-Site & Online</span>
         <a href="https://www.iu-a.org.il" target="_blank" class="pill pill-outline">www.iu-a.org.il</a>
         <a href="https://www.uroweb.org" target="_blank" class="pill pill-outline">www.uroweb.org</a>
@@ -411,8 +481,8 @@
       <div class="welcome-title">Welcome & Opening</div>
       <div class="welcome-names">
         <b>Prof. M. Duvdevani</b> Head, IUA &nbsp;·&nbsp;
-        <b>Prof. O. Traxer</b> EAU Endourology (online) &nbsp;·&nbsp;
-        <b>Prof. S. Golan</b> Uro-Oncology, IUA
+        <b>Prof. O. Traxer</b> Head, EAU Endourology (online) &nbsp;·&nbsp;
+        <b>Prof. S. Golan</b> Head of Uro-Oncology section, IUA
       </div>
     </div>
 
@@ -423,11 +493,11 @@
       <div class="session-card reveal" style="--i:0">
         <div class="session-head"><div class="session-num">01</div><div class="session-title">Introduction -<br>Defining the Disease</div></div>
         <div class="session-body">
-          <div class="talk"><div class="talk-time">08:30 – 08:45</div><div class="talk-body"><div class="talk-title">The need for focal therapy in 2026 -has whole gland treatment not improved enough?!</div><div class="talk-speaker">Shay Golan, IL</div></div></div>
-          <div class="talk"><div class="talk-time">08:45 – 09:00</div><div class="talk-body"><div class="talk-title">Who should be considered for focal therapy?</div><div class="talk-speaker">Juan Ignacio Martinez Salamanca, ES</div></div></div>
-          <div class="talk"><div class="talk-time">09:00 – 09:15</div><div class="talk-body"><div class="talk-title">Blood and tissue biomarkers as additional navigators</div><div class="talk-speaker">Eric Barret, FR</div></div></div>
+          <div class="talk"><div class="talk-time">08:30 – 08:45</div><div class="talk-body"><div class="talk-title">The need for focal therapy in 2026 - has whole gland treatment not improved enough?!</div><div class="talk-speaker">Shay Golan, ISR</div></div></div>
+          <div class="talk"><div class="talk-time">08:45 – 09:00</div><div class="talk-body"><div class="talk-title">Who should be considered for focal therapy?</div><div class="talk-speaker">Juan Ignacio Martinez Salamanca, ESP</div></div></div>
+          <div class="talk"><div class="talk-time">09:00 – 09:15</div><div class="talk-body"><div class="talk-title">Blood and tissue biomarkers as additional navigators</div><div class="talk-speaker">Eric Barret, FRA</div></div></div>
           <div class="talk"><div class="talk-time">09:15 – 09:30</div><div class="talk-body"><div class="talk-title">Pitfalls and limitations of modern prostate MRI</div><div class="talk-speaker">Francesco Giganti, UK</div></div></div>
-          <div class="talk"><div class="talk-time">09:30 – 09:45</div><div class="talk-body"><div class="talk-title">Is there an additive role to PET PSMA?</div><div class="talk-speaker">Liran Domachevsky, IL</div></div></div>
+          <div class="talk"><div class="talk-time">09:30 – 09:45</div><div class="talk-body"><div class="talk-title">Is there an additive role to PET PSMA?</div><div class="talk-speaker">Liran Domachevsky, ISR</div></div></div>
           <div class="talk"><div class="talk-time">09:45 – 10:00</div><div class="talk-body"><div class="talk-title">The crucial role of prostate biopsy strategy</div><div class="talk-speaker">Georg Salomon, GER</div></div></div>
           <div class="break-row"><div class="break-time">10:00 – 10:20</div><div class="break-label">☕ Coffee Break</div><div class="break-line"></div></div>
           <div class="info-panel">
@@ -442,14 +512,14 @@
       <div class="session-card reveal" style="--i:1">
         <div class="session-head"><div class="session-num">02</div><div class="session-title">Technique - Semi-Live Surgeries - Data & Innovation</div></div>
         <div class="session-body">
-          <div class="talk"><div class="talk-time">10:20 – 10:35</div><div class="talk-body"><div class="talk-title">Focal Cryoablation</div><div class="talk-speaker">Shay Golan, IL</div></div></div>
+          <div class="talk"><div class="talk-time">10:20 – 10:35</div><div class="talk-body"><div class="talk-title">Focal Cryoablation</div><div class="talk-speaker">Shay Golan, ISR</div></div></div>
           <div class="talk"><div class="talk-time">10:35 – 10:50</div><div class="talk-body"><div class="talk-title">Focal HIFU</div><div class="talk-speaker">Georg Salomon, GER</div></div></div>
-          <div class="talk"><div class="talk-time">10:50 – 11:05</div><div class="talk-body"><div class="talk-title">Focal IRE (Nanoknife)</div><div class="talk-speaker">Dmitry Enikeev, IL, AUT</div></div></div>
-          <div class="talk"><div class="talk-time">11:05 – 11:20</div><div class="talk-body"><div class="talk-title">Focal Brachytherapy</div><div class="talk-speaker">Eric Barret, FR</div></div></div>
-          <div class="talk"><div class="talk-time">11:20 – 11:35</div><div class="talk-body"><div class="talk-title">Focal Laser Ablation</div><div class="talk-speaker">Alexander Kheifets, IL</div></div></div>
+          <div class="talk"><div class="talk-time">10:50 – 11:05</div><div class="talk-body"><div class="talk-title">Focal IRE (Nanoknife)</div><div class="talk-speaker">Dmitry Enikeev, ISR, AUT</div></div></div>
+          <div class="talk"><div class="talk-time">11:05 – 11:20</div><div class="talk-body"><div class="talk-title">Focal Brachytherapy</div><div class="talk-speaker">Eric Barret, FRA</div></div></div>
+          <div class="talk"><div class="talk-time">11:20 – 11:35</div><div class="talk-body"><div class="talk-title">Focal Laser Ablation</div><div class="talk-speaker">Alexander Kheifets, ISR</div></div></div>
           <div class="cases-card">
             <div class="cases-header"><div class="cases-time">11:35 – 12:20</div><div class="cases-title">Clinical Cases -5 Interactive Discussions</div></div>
-            <div class="cases-names">Eric Barret (FR), Ilan Gielchinski (IL), Daniel Halstuch (IL), Juan Ignacio Martinez Salamanca (ES)</div>
+            <div class="cases-names">Eric Barret (FRA), Ilan Gielchinski (ISR), Daniel Halstuch (ISR), Juan Ignacio Martinez Salamanca (ESP)</div>
           </div>
           <div class="break-row"><div class="break-time">12:20 – 12:50</div><div class="break-label">🍽 Lunch Break</div><div class="break-line"></div></div>
           <div class="info-panel">
@@ -465,23 +535,23 @@
       <div class="session-card reveal" style="--i:2">
         <div class="session-head"><div class="session-num">03</div><div class="session-title">Post-Treatment Monitoring & Management</div></div>
         <div class="session-body">
-          <div class="talk"><div class="talk-time">12:50 – 13:05</div><div class="talk-body"><div class="talk-title">How to consolidate the follow-up protocol -Utilization of PSA, imaging, and biopsy</div><div class="talk-speaker">Eric Barret, FR</div></div></div>
-          <div class="talk"><div class="talk-time">13:05 – 13:20</div><div class="talk-body"><div class="talk-title">Treatment failure -definition and salvage treatment options</div><div class="talk-speaker">Juan Ignacio Martinez Salamanca, ES</div></div></div>
-          <div class="talk"><div class="talk-time">13:20 – 13:35</div><div class="talk-body"><div class="talk-title">Salvage radical prostatectomy</div><div class="talk-speaker">Zaher Bahus, IL</div></div></div>
-          <div class="talk"><div class="talk-time">13:35 – 13:50</div><div class="talk-body"><div class="talk-title">How to initiate a focal therapy program</div><div class="talk-speaker">Dmitry Enikeev, IL, AUT</div></div></div>
-          <div class="talk"><div class="talk-time">13:50 – 14:05</div><div class="talk-body"><div class="talk-title">Ongoing trials and future perspectives</div><div class="talk-speaker">Roy Mano, IL</div></div></div>
+          <div class="talk"><div class="talk-time">12:50 – 13:05</div><div class="talk-body"><div class="talk-title">How to consolidate the follow-up protocol -Utilization of PSA, imaging, and biopsy</div><div class="talk-speaker">Eric Barret, FRA</div></div></div>
+          <div class="talk"><div class="talk-time">13:05 – 13:20</div><div class="talk-body"><div class="talk-title">Treatment failure - definition and salvage treatment options</div><div class="talk-speaker">Juan Ignacio Martinez Salamanca, ESP</div></div></div>
+          <div class="talk"><div class="talk-time">13:20 – 13:35</div><div class="talk-body"><div class="talk-title">Salvage Radical Prostatectomy</div><div class="talk-speaker">Zaher Bahus, ISR</div></div></div>
+          <div class="talk"><div class="talk-time">13:35 – 13:50</div><div class="talk-body"><div class="talk-title">How to initiate a focal therapy program</div><div class="talk-speaker">Dmitry Enikeev, ISR, AUT</div></div></div>
+          <div class="talk"><div class="talk-time">13:50 – 14:05</div><div class="talk-body"><div class="talk-title">Ongoing trials and future perspectives</div><div class="talk-speaker">Roy Mano, ISR</div></div></div>
           <div class="closure-row"><div class="closure-time">14:05</div><div class="closure-label">Closure & Summary</div></div>
           <div class="info-panel">
             <div class="info-label">Scientific Committee</div>
             <div class="info-text committee">
-              <strong>Prof. Shay Golan</strong> (IL) <span class="chair">CHAIR</span><br>
-              <strong>Prof. Dmitry Enikeev</strong> (IL/AUT)<br>
-              <strong>Dr. Eric Barret</strong> (FR)<br>
-              <strong>Dr. Juan Ignacio Martinez Salamanca</strong> (ES)<br>
+              <strong>Prof. Shay Golan</strong> (ISR) <span class="chair">CHAIR</span><br>
+              <strong>Prof. Dmitry Enikeev</strong> (ISR/AUT)<br>
+              <strong>Dr. Eric Barret</strong> (FRA)<br>
+              <strong>Dr. Juan Ignacio Martinez Salamanca</strong> (ESP)<br>
               <strong>Prof. Georg Salomon</strong> (GER)<br>
               <strong>Prof. Francesco Giganti</strong> (UK)
             </div>
-            <div class="committee-foot">Organized by the Israel Urological Association in collaboration with the European Association of Urology</div>
+            <div class="committee-foot">Organized by the Israel Urological Association, Section of Uro-Oncology in collaboration with the EAU Endourology Focal Therapy Working Group</div>
           </div>
         </div>
       </div>
@@ -920,6 +990,49 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   animate();
 })();
 </script>
+
+<!-- Registration Modal -->
+<div class="modal-overlay" id="regModal" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('regModal').classList.remove('active')">&times;</button>
+    <h2>Register for the Conference</h2>
+    <p class="modal-subtitle">3 July 2026 · Rabin Medical Center, Beilinson Campus</p>
+    <form id="regForm" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="regFirst">First Name</label>
+          <input type="text" id="regFirst" name="first_name" required placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="regLast">Last Name</label>
+          <input type="text" id="regLast" name="last_name" required placeholder="Doe">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" name="email" required placeholder="john@example.com">
+      </div>
+      <div class="form-group">
+        <label for="regAffil">Institution / Affiliation</label>
+        <input type="text" id="regAffil" name="affiliation" placeholder="Hospital or university">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="regCountry">Country</label>
+          <input type="text" id="regCountry" name="country" placeholder="Israel">
+        </div>
+        <div class="form-group">
+          <label for="regAttend">Attendance</label>
+          <select id="regAttend" name="attendance">
+            <option value="onsite">On-Site</option>
+            <option value="online">Online</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="form-submit">Submit Registration</button>
+    </form>
+  </div>
+</div>
 
 </body>
 </html>
