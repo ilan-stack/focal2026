@@ -529,7 +529,7 @@
           <div class="talk"><div class="talk-time">11:20 – 11:35</div><div class="talk-body"><div class="talk-title">Focal Laser Ablation</div><div class="talk-speaker">Alexander Kheifets, ISR</div></div></div>
           <div class="cases-card">
             <div class="cases-header"><div class="cases-time">11:35 – 12:20</div><div class="cases-title">Clinical Cases -5 Interactive Discussions</div></div>
-            <div class="cases-names">Eric Barret (FRA), Ilan Gielchinski (ISR), Daniel Halstuch (ISR), Juan Ignacio Martinez Salamanca (ESP)</div>
+            <div class="cases-names">Eric Barret (FRA), Ilan Gielchinsky (ISR), Daniel Halstuch (ISR), Juan Ignacio Martinez Salamanca (ESP)</div>
           </div>
           <div class="break-row"><div class="break-time">12:20 – 12:50</div><div class="break-label">🍽 Lunch Break</div><div class="break-line"></div></div>
           <div class="info-panel">
@@ -1007,7 +1007,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     <button class="modal-close" onclick="document.getElementById('regModal').classList.remove('active')">&times;</button>
     <h2>Register for the Conference</h2>
     <p class="modal-subtitle">3 July 2026 · Rabin Medical Center, Beilinson Campus</p>
-    <form id="regForm" onsubmit="return false;">
+    <form id="regForm">
       <div class="form-row">
         <div class="form-group">
           <label for="regFirst">First Name</label>
@@ -1040,7 +1040,53 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         </div>
       </div>
       <button type="submit" class="form-submit">Submit Registration</button>
+      <div id="regMsg" style="display:none;text-align:center;margin-top:12px;font-weight:600;font-size:14px;"></div>
     </form>
+    <script>
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = this.querySelector('.form-submit');
+      var msg = document.getElementById('regMsg');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      msg.style.display = 'none';
+
+      var data = {
+        first_name: document.getElementById('regFirst').value,
+        last_name: document.getElementById('regLast').value,
+        email: document.getElementById('regEmail').value,
+        affiliation: document.getElementById('regAffil').value,
+        country: document.getElementById('regCountry').value,
+        attendance: document.getElementById('regAttend').value
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbwvb_UWkW5BEiPJO0wUY55sb8XMJIgwd1s1zuh4Nxu0Eh8TVgP3YGBwNXsPXIRua94D/exec', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        msg.style.display = 'block';
+        msg.style.color = '#0a8a5a';
+        msg.textContent = 'Registration successful! We will be in touch.';
+        btn.textContent = 'Registered';
+        document.getElementById('regForm').reset();
+        setTimeout(function() {
+          document.getElementById('regModal').classList.remove('active');
+          btn.disabled = false;
+          btn.textContent = 'Submit Registration';
+          msg.style.display = 'none';
+        }, 3000);
+      })
+      .catch(function() {
+        msg.style.display = 'block';
+        msg.style.color = '#cc3333';
+        msg.textContent = 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Submit Registration';
+      });
+    });
+    </script>
   </div>
 </div>
 
