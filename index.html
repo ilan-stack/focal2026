@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Focal Therapy 2026 – Conference Program</title>
+<link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -701,7 +702,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 /* ── Force-field dot grid with rotating text banner ── */
 (function() {
   const canvas = document.getElementById('dotfield');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
   const SPACING = 8;
   const DOT_R = 0.8;
   const PLUS_SIZE = 1.8;
@@ -789,7 +790,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     offCanvas = document.createElement('canvas');
     offCanvas.width = cols;
     offCanvas.height = rows;
-    offCtx = offCanvas.getContext('2d');
+    offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
     // Delay first sample to ensure images are loaded
     var firstMsg = MESSAGES[0];
     if (firstMsg.image && imageCache[firstMsg.image] && !imageCache[firstMsg.image].complete) {
@@ -1060,12 +1061,13 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         attendance: document.getElementById('regAttend').value
       };
 
-      fetch('https://script.google.com/macros/s/AKfycbwvb_UWkW5BEiPJO0wUY55sb8XMJIgwd1s1zuh4Nxu0Eh8TVgP3YGBwNXsPXIRua94D/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbxOdo_B9qM7DvyojjsFgeIf3mBBw3flg4YdnrLUZWEqnjbOUWTD4_HN1RAQdO38ItcP/exec', {
         method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
       })
-      .then(function(r) { return r.json(); })
-      .then(function(res) {
+      .then(function() {
         msg.style.display = 'block';
         msg.style.color = '#0a8a5a';
         msg.textContent = 'Registration successful! We will be in touch.';
