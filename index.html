@@ -58,7 +58,7 @@
     -webkit-backdrop-filter: blur(20px);
     border-radius: 16px;
     border: 1px solid rgba(255,255,255,0.5);
-    padding: 36px;
+    padding: 28px;
     box-shadow: 0 8px 40px rgba(0,100,160,0.08);
     transition: transform 0.15s ease-out, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
     transform-style: preserve-3d;
@@ -66,7 +66,7 @@
   }
   .hero-logos {
     display: flex; align-items: center; justify-content: flex-start; gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
   .hero-logos img {
     height: 30px; width: auto; object-fit: contain;
@@ -87,7 +87,7 @@
     100% { background-position: 0% 50%; }
   }
   .hero-label {
-    display: block; font-size: clamp(16px, 2.8vw, 30px); font-weight: 800;
+    display: block; font-size: clamp(13px, 2vw, 22px); font-weight: 800;
     letter-spacing: -0.5px; text-transform: uppercase;
     background: linear-gradient(90deg, #0088bb, #00c2e8, #0099cc, #4dd8e8, #0088bb);
     background-size: 300% 100%;
@@ -98,8 +98,8 @@
     width: 100%;
   }
   .hero-section h1 {
-    font-size: clamp(28px, 4.5vw, 46px); font-weight: 800;
-    line-height: 1.08; letter-spacing: -2px; color: var(--text); margin-bottom: 12px;
+    font-size: clamp(24px, 3.5vw, 36px); font-weight: 800;
+    line-height: 1.08; letter-spacing: -1.5px; color: var(--text); margin-bottom: 8px;
   }
   .hero-section h1 .gradient {
     background: linear-gradient(135deg, var(--purple), var(--purple2));
@@ -107,14 +107,34 @@
     background-clip: text;
   }
   .hero-tagline {
-    font-size: clamp(18px, 3vw, 24px); font-weight: 700;
-    font-style: italic; color: var(--text2); margin-bottom: 24px;
+    font-size: clamp(15px, 2.5vw, 20px); font-weight: 700;
+    font-style: italic; color: var(--text2); margin-bottom: 16px;
   }
   .hero-desc {
-    font-size: 16px; color: var(--text2); line-height: 1.7;
-    max-width: 540px; margin-bottom: 32px;
+    font-size: 14px; color: var(--text2); line-height: 1.6;
+    max-width: 540px; margin-bottom: 20px;
   }
-  .hero-meta { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .video-wrap {
+    position: relative; max-width: 540px; margin: 0 auto 24px; cursor: pointer;
+  }
+  .hero-video {
+    width: 100%; border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,100,160,0.12);
+    border: 1px solid var(--border);
+    display: block;
+  }
+  .video-play-btn {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(0,153,204,0.85); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .video-play-btn:hover { transform: translate(-50%, -50%) scale(1.1); background: rgba(0,153,204,1); }
+  .video-play-btn svg { width: 32px; height: 32px; fill: #fff; margin-left: 4px; }
+  .video-wrap.playing .video-play-btn { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .hero-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
   .hero-meta-item { display: flex; align-items: flex-start; gap: 12px; }
   .hero-meta-icon { font-size: 18px; flex-shrink: 0; }
   .hero-meta-text { font-size: 14px; color: var(--text2); line-height: 1.5; }
@@ -459,6 +479,12 @@
       <h1>Focal Therapy for Localized Prostate <span class="gradient">Cancer</span></h1>
       <div class="hero-tagline">- Change Is Coming</div>
       <p class="hero-desc">A collaboration between EAU Endourology, Section of Focal Therapy and IUA, Section of Uro-Oncology. International hybrid meeting featuring semi-live surgeries, expert panels, and interactive case discussions.</p>
+      <div class="video-wrap" id="videoWrap" onclick="var v=this.querySelector('video');v.play();this.classList.add('playing');">
+        <video class="hero-video" playsinline preload="metadata" onplay="this.controls=true;this.parentElement.classList.add('playing')" onpause="if(this.currentTime>0&&!this.ended)return;this.controls=false;this.parentElement.classList.remove('playing')" onended="this.controls=false;this.parentElement.classList.remove('playing')">
+          <source src="invite-web.mp4" type="video/mp4">
+        </video>
+        <button class="video-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+      </div>
       <div class="hero-meta">
         <a class="hero-meta-item" href="https://www.google.com/maps/search/Felsenstein+Medical+Research+Center+Beilinson+Campus+Petah+Tikva+Israel" target="_blank" style="text-decoration:none;color:inherit;">
           <div class="hero-meta-icon">📍</div>
@@ -650,7 +676,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   function tick() {
     const vh = window.innerHeight;
-    const scrollT = Math.min(1, Math.max(0, window.scrollY / (vh * 0.4)));
+    const scrollT = Math.min(1, Math.max(0, window.scrollY / (vh * 0.9)));
 
     if (scrollT > 0.01) {
       // Scrolling: parallax + scatter (overrides tilt)
@@ -659,7 +685,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       heroContent.style.opacity = '1';
       heroContent.style.boxShadow = '';
 
-      const SCATTER_AT = 0.3;
+      const SCATTER_AT = 0.6;
       if (scrollT < SCATTER_AT) {
         const fade = scrollT / SCATTER_AT;
         for (let i = 0; i < children.length; i++) {
