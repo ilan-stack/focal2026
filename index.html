@@ -1069,10 +1069,41 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         </div>
         <div class="form-group">
           <label for="regAttend">Attendance</label>
-          <select id="regAttend" name="attendance">
+          <select id="regAttend" name="attendance" onchange="var on=this.value==='onsite';document.getElementById('parkingToggle').style.display=on?'flex':'none';if(!on){document.getElementById('regParking').checked=false;document.getElementById('parkingFields').style.display='none';}">
             <option value="onsite">On-Site</option>
             <option value="online">Online</option>
           </select>
+        </div>
+      </div>
+      <div class="form-group" id="parkingToggle" style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="regParking" name="parking" style="width:auto;margin:0;" onchange="document.getElementById('parkingFields').style.display=this.checked?'block':'none';">
+        <label for="regParking" style="margin:0;cursor:pointer;">I need on-site parking</label>
+      </div>
+      <div id="parkingFields" style="display:none;">
+        <p style="font-size:13px;color:#666;margin:4px 0 12px;">Details below will be forwarded to site security.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regParkName">Name on permit</label>
+            <input type="text" id="regParkName" name="park_name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label for="regParkMobile">Mobile number</label>
+            <input type="tel" id="regParkMobile" name="park_mobile" placeholder="+972 50 000 0000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regParkVehicle">Vehicle type</label>
+            <input type="text" id="regParkVehicle" name="park_vehicle" placeholder="e.g. Toyota Corolla">
+          </div>
+          <div class="form-group">
+            <label for="regParkColor">Color</label>
+            <input type="text" id="regParkColor" name="park_color" placeholder="e.g. White">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regParkPlate">License plate number</label>
+          <input type="text" id="regParkPlate" name="park_plate" placeholder="000-00-000">
         </div>
       </div>
       <button type="submit" class="form-submit">Submit Registration</button>
@@ -1087,13 +1118,20 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       btn.textContent = 'Submitting...';
       msg.style.display = 'none';
 
+      var parking = document.getElementById('regParking').checked;
       var data = {
         first_name: document.getElementById('regFirst').value,
         last_name: document.getElementById('regLast').value,
         email: document.getElementById('regEmail').value,
         affiliation: document.getElementById('regAffil').value,
         country: document.getElementById('regCountry').value,
-        attendance: document.getElementById('regAttend').value
+        attendance: document.getElementById('regAttend').value,
+        parking: parking ? 'yes' : 'no',
+        park_name: parking ? document.getElementById('regParkName').value : '',
+        park_mobile: parking ? document.getElementById('regParkMobile').value : '',
+        park_vehicle: parking ? document.getElementById('regParkVehicle').value : '',
+        park_color: parking ? document.getElementById('regParkColor').value : '',
+        park_plate: parking ? document.getElementById('regParkPlate').value : ''
       };
 
       fetch('https://script.google.com/macros/s/AKfycbxOdo_B9qM7DvyojjsFgeIf3mBBw3flg4YdnrLUZWEqnjbOUWTD4_HN1RAQdO38ItcP/exec', {
