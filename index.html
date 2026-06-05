@@ -182,20 +182,20 @@
   }
 
   /* ═══ COUNTDOWN ═══ */
-  .countdown { margin-top: 24px; text-align: center; }
+  .countdown { margin: 24px auto 0; text-align: center; max-width: 540px; }
   .cd-label {
     font-size: 12px; font-weight: 600; letter-spacing: 2px;
     text-transform: uppercase; color: var(--purple);
     margin-bottom: 10px; opacity: 0.85;
   }
-  .cd-grid { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .cd-grid { display: flex; gap: 10px; justify-content: center; }
   .cd-cell {
     background: rgba(255,255,255,0.75);
     border: 1px solid rgba(0,153,204,0.2);
     border-radius: 10px;
     padding: 10px 14px;
     text-align: center;
-    min-width: 64px;
+    flex: 1;
     backdrop-filter: blur(6px);
   }
   .cd-num {
