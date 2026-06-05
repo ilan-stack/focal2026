@@ -181,6 +181,38 @@
     border-color: var(--purple); color: var(--purple);
   }
 
+  /* ═══ COUNTDOWN ═══ */
+  .countdown { margin-top: 24px; }
+  .cd-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--purple);
+    margin-bottom: 10px; opacity: 0.85;
+  }
+  .cd-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+  .cd-cell {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(0,153,204,0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+    min-width: 64px;
+    backdrop-filter: blur(6px);
+  }
+  .cd-num {
+    font-size: 26px; font-weight: 700;
+    color: var(--text); line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-unit {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text2); margin-top: 4px;
+  }
+  @media (max-width: 600px) {
+    .cd-cell { min-width: 56px; padding: 8px 10px; }
+    .cd-num { font-size: 22px; }
+  }
+
   .scroll-arrow {
     display: flex; align-items: center; gap: 8px;
     margin-top: 28px; color: var(--purple);
@@ -500,6 +532,46 @@
         <a href="https://www.google.com/maps/search/Felsenstein+Medical+Research+Center+Beilinson+Campus+Petah+Tikva+Israel" target="_blank" class="pill pill-outline" style="line-height:1.25;text-align:center;">📍 Felsenstein<br>Medical Research Center</a>
         <a href="https://map3d-delta.vercel.app/" target="_blank" rel="noopener" class="pill pill-outline" style="line-height:1.25;text-align:center;">🅿️ Parking<br>Instructions</a>
       </div>
+
+      <div class="countdown" id="countdown" aria-label="Time until conference starts">
+        <div class="cd-label">Conference starts in</div>
+        <div class="cd-grid">
+          <div class="cd-cell"><div class="cd-num" id="cdDays">--</div><div class="cd-unit">Days</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cdHours">--</div><div class="cd-unit">Hours</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cdMins">--</div><div class="cd-unit">Minutes</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cdSecs">--</div><div class="cd-unit">Seconds</div></div>
+        </div>
+      </div>
+      <script>
+      (function(){
+        // 3 July 2026 08:30 Israel time (IDT, UTC+3)
+        var target = new Date('2026-07-03T08:30:00+03:00').getTime();
+        var dEl = document.getElementById('cdDays'),
+            hEl = document.getElementById('cdHours'),
+            mEl = document.getElementById('cdMins'),
+            sEl = document.getElementById('cdSecs'),
+            wrap = document.getElementById('countdown');
+        function pad(n){ return n < 10 ? '0' + n : '' + n; }
+        function tick(){
+          var diff = target - Date.now();
+          if (diff <= 0) {
+            wrap.innerHTML = '<div class="cd-label" style="font-size:18px;color:var(--purple);">The conference is live</div>';
+            return;
+          }
+          var s = Math.floor(diff/1000);
+          var d = Math.floor(s / 86400); s -= d*86400;
+          var h = Math.floor(s / 3600);  s -= h*3600;
+          var m = Math.floor(s / 60);    s -= m*60;
+          dEl.textContent = d;
+          hEl.textContent = pad(h);
+          mEl.textContent = pad(m);
+          sEl.textContent = pad(s);
+        }
+        tick();
+        setInterval(tick, 1000);
+      })();
+      </script>
+
       <a href="#program" class="scroll-arrow" aria-label="Scroll to program">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
         <span>View Program</span>
