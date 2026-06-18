@@ -1111,6 +1111,18 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     <h2>Register for the Conference</h2>
     <p class="modal-subtitle">3 July 2026 · Rabin Medical Center, Beilinson Campus</p>
     <form id="regForm">
+      <div class="form-group">
+        <label for="regTitle">Title</label>
+        <select id="regTitle" name="title" required>
+          <option value="" disabled selected>Select title</option>
+          <option value="Dr.">Dr.</option>
+          <option value="Prof.">Prof.</option>
+          <option value="Mr.">Mr.</option>
+          <option value="Ms.">Ms.</option>
+          <option value="Mrs.">Mrs.</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
       <div class="form-row">
         <div class="form-group">
           <label for="regFirst">First Name</label>
@@ -1188,6 +1200,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
       var parking = document.getElementById('regParking').checked;
       var data = {
+        title: document.getElementById('regTitle').value,
         first_name: document.getElementById('regFirst').value,
         last_name: document.getElementById('regLast').value,
         email: document.getElementById('regEmail').value,
